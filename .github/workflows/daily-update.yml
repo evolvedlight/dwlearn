@@ -1,1 +1,61 @@
-name: Daily DW German Learning Updateon:  schedule:    # Run every day at 8:00 AM UTC (adjust as needed)    - cron: '0 8 * * *'  workflow_dispatch: # Allow manual triggeringjobs:  generate-content:    runs-on: ubuntu-latest        permissions:      contents: write      pages: write      id-token: write      model-inference: read        steps:      - name: Checkout repository        uses: actions/checkout@v4            - name: Setup Node.js        uses: actions/setup-node@v4        with:          node-version: '18'          cache: 'npm'            - name: Install dependencies        run: npm ci            - name: Build TypeScript        run: npm run build            - name: Generate learning content        env:          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          GITHUB_MODEL_ENDPOINT: https://models.inference.ai.azure.com        run: npm run generate            - name: Setup Pages        uses: actions/configure-pages@v4            - name: Upload to GitHub Pages        uses: actions/upload-pages-artifact@v3        with:          path: ./public            - name: Deploy to GitHub Pages        id: deployment        uses: actions/deploy-pages@v4            - name: Commit and push data        run: |          git config --local user.email "action@github.com"          git config --local user.name "GitHub Action"          git add data/          git diff --staged --quiet || git commit -m "Daily update: $(date +'%Y-%m-%d')"          git push        env:          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+name: Daily DW German Learning Update
+
+on:
+  schedule:
+    # Run every day at 8:00 AM UTC (adjust as needed)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      models: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build TypeScript
+        run: npm run build
+      
+      - name: Generate learning content
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_MODEL_ENDPOINT: https://models.inference.ai.azure.com
+        run: npm run generate
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      - name: Commit and push data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/
+          git diff --staged --quiet || git commit -m "Daily update: $(date +'%Y-%m-%d')"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
