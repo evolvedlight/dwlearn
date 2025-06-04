@@ -1,0 +1,31 @@
+{
+  "name": "dwlearn",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "generate": "npm run build && npm start",
+    "test": "ts-node src/test.ts",
+    "test:build": "npm run build && node dist/test.js",
+    "test-graphql": "ts-node src/testGraphQL.ts",
+    "debug-graphql": "ts-node src/debugGraphQL.ts"
+  },
+  "keywords": ["german", "learning", "dw", "deutsche-welle", "language"],
+  "author": "",
+  "license": "ISC",
+  "description": "German learning application using Deutsche Welle's slow news with AI-powered explanations and quizzes",
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "@types/node": "^22.15.29",
+    "axios": "^1.9.0",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.35"
+  }
+}
