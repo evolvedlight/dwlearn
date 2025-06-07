@@ -2,8 +2,8 @@ name: Daily DW German Learning Update
 
 on:
   schedule:
-    # Run every day at 8:00 AM UTC (adjust as needed)
-    - cron: '0 8 * * *'
+    # Run every day at around midday
+    - cron: '*/10 12-14 * * *'
   workflow_dispatch: # Allow manual triggering
 
 jobs:

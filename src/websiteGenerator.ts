@@ -43,6 +43,7 @@ export class WebsiteGenerator {
    * Generates the main index page
    */
   private async generateIndexPage(articles: ProcessedArticle[]): Promise<void> {
+    const sortedArticles = [...articles].sort((a, b) => new Date(b.article.publishedAt).getTime() - new Date(a.article.publishedAt).getTime());
     const html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +61,7 @@ export class WebsiteGenerator {
     
     <main>
         <div class="articles-grid">
-            ${articles.map(article => `
+            ${sortedArticles.map(article => `
                 <div class="article-card">
                     <h2><a href="articles/${this.slugify(article.article.title)}.html">${article.article.title}</a></h2>
                     <p class="date">${new Date(article.article.publishedAt).toLocaleDateString()}</p>
@@ -254,6 +255,15 @@ main {
 .article-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.article-card img { /* Added style for images in article cards */
+    max-width: 100%;
+    height: auto;
+    display: block; /* Optional: to remove extra space below image if it's an inline element */
+    margin-top: 1rem; /* Optional: to add some space above the image */
+    margin-bottom: 1rem; /* Optional: to add some space below the image */
+    border-radius: 4px; /* Optional: to match card's rounded corners */
 }
 
 .article-card h2 a {
