@@ -125,27 +125,33 @@ export class WebsiteGenerator {
             return result;
         };
 
-            // Heuristic to detect in-article subheadings (short, title-cased lines without sentence punctuation)
-            const isSubheading = (text: string): boolean => {
-                if (text.length < 3 || text.length > 120) return false;
-                if (/[.!?]$/.test(text)) return false; // ends like a sentence
-                if (/^[-*•]/.test(text)) return false; // list item
-                const words = text.split(/\s+/).filter(Boolean);
-                if (words.length > 0 && words.length <= 12) {
-                    const capitalized = words.filter(w => /^[A-ZÄÖÜ]/.test(w));
-                    if (capitalized.length / words.length >= 0.6) return true;
+            // Updated heuristic: a paragraph is a subheading if it is followed by TWO newline characters (\n\n)
+            // (i.e., a single blank line) and does not end with a full stop.
+            const rawContent = article.content;
+            interface Segment { text: string; isHeading: boolean; }
+            const segments: Segment[] = [];
+            let idx = 0;
+            while (idx < rawContent.length) {
+                const nextDouble = rawContent.indexOf('\n\n', idx);
+                if (nextDouble === -1) {
+                    const rem = rawContent.slice(idx).trim();
+                    if (rem) segments.push({ text: rem, isHeading: false });
+                    break;
                 }
-                return false;
-            };
+                const segmentText = rawContent.slice(idx, nextDouble).trim();
+                // We only needed to detect the \n\n delimiter; no requirement for a second blank line now.
+                if (segmentText) {
+                    const endsWithPeriod = /\.$/.test(segmentText);
+                    const isHeading = !endsWithPeriod; // treat as subheading if no final period
+                    segments.push({ text: segmentText, isHeading });
+                }
+                idx = nextDouble + 2; // skip the delimiter (two newlines)
+            }
 
-            const processedParagraphs = article.content.split('\n\n').map((p: string) => {
-                const trimmed = p.trim();
-                if (!trimmed) return '';
-                if (isSubheading(trimmed)) {
-                    return `<h3 class="article-subheading">${highlightWord(trimmed)}</h3>`;
-                }
-                return `<p>${highlightWord(trimmed)}</p>`;
-            }).join('');
+            const processedParagraphs = segments.map(seg => seg.isHeading
+                ? `<h3 class="article-subheading">${highlightWord(seg.text)}</h3>`
+                : `<p>${highlightWord(seg.text)}</p>`
+            ).join('');
 
         const html = `
 <!DOCTYPE html>
