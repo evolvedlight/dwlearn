@@ -39,6 +39,18 @@ export class WebsiteGenerator {
     console.log(`Website generated with ${articles.length} articles`);
   }
 
+    /**
+     * Basic HTML escaping to prevent HTML injection in tooltips
+     */
+    private escapeHtml(raw: string): string {
+        return raw
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
   /**
    * Generates the main index page
    */
@@ -92,7 +104,50 @@ export class WebsiteGenerator {
     const { article, explanations, quizzes } = processedArticle;
     const filename = `${this.slugify(article.title)}.html`;
     
-    const html = `
+        // Highlight difficult words inside the article text with tooltip spans
+        const highlightWord = (paragraph: string): string => {
+            let result = paragraph;
+            // Sort words by length desc to avoid partial replacements (e.g., 'in' inside 'international')
+            const sortedExplanations = [...explanations].sort((a, b) => b.word.length - a.word.length);
+            for (const exp of sortedExplanations) {
+                const escapedWord = exp.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                // Match word boundaries using Unicode letters; keep preceding separator via capture
+                const regex = new RegExp(`(^|[^\\p{L}])(${escapedWord})(?=([^\\p{L}]|$))`, 'giu');
+                result = result.replace(regex, (match, p1, p2) => {
+                    const safeWord = this.escapeHtml(p2);
+                    const safeDef = this.escapeHtml(exp.definition);
+                    const safePos = this.escapeHtml(exp.partOfSpeech || '');
+                        const safeExample = this.escapeHtml(exp.example || '');
+                    const tooltip = `<span class=\"explained-word ${exp.difficulty}\"><span class=\"ew-term\">${safeWord}</span><span class=\"tooltip-text\"><strong>${safeWord}</strong><br/><em>${safePos}</em><br/>${safeDef}${safeExample ? `<br/><span class=\"example\">${safeExample}</span>` : ''}</span></span>`;
+                    return `${p1}${tooltip}`;
+                });
+            }
+            return result;
+        };
+
+            // Heuristic to detect in-article subheadings (short, title-cased lines without sentence punctuation)
+            const isSubheading = (text: string): boolean => {
+                if (text.length < 3 || text.length > 120) return false;
+                if (/[.!?]$/.test(text)) return false; // ends like a sentence
+                if (/^[-*•]/.test(text)) return false; // list item
+                const words = text.split(/\s+/).filter(Boolean);
+                if (words.length > 0 && words.length <= 12) {
+                    const capitalized = words.filter(w => /^[A-ZÄÖÜ]/.test(w));
+                    if (capitalized.length / words.length >= 0.6) return true;
+                }
+                return false;
+            };
+
+            const processedParagraphs = article.content.split('\n\n').map((p: string) => {
+                const trimmed = p.trim();
+                if (!trimmed) return '';
+                if (isSubheading(trimmed)) {
+                    return `<h3 class="article-subheading">${highlightWord(trimmed)}</h3>`;
+                }
+                return `<p>${highlightWord(trimmed)}</p>`;
+            }).join('');
+
+        const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,25 +178,9 @@ export class WebsiteGenerator {
         
         <section class="text-section">
             <h2>📖 Article Text</h2>
+                        <p class="hover-hint">Hover highlighted words for definitions & examples.</p>
             <div class="german-text">
-                ${article.content.split('\n\n').map((paragraph: string) => 
-                    paragraph.trim() ? `<p>${paragraph}</p>` : ''
-                ).join('')}
-            </div>
-        </section>
-        
-        <section class="explanations-section">
-            <h2>📚 Difficult Words Explained</h2>
-            <div class="explanations-grid">
-                ${explanations.map(exp => `
-                    <div class="explanation-card ${exp.difficulty}">
-                        <h3>${exp.word}</h3>
-                        <p class="part-of-speech">${exp.partOfSpeech}</p>
-                        <p class="definition">${exp.definition}</p>
-                        <p class="example"><em>${exp.example}</em></p>
-                        <span class="difficulty-badge">${exp.difficulty}</span>
-                    </div>
-                `).join('')}
+                                ${processedParagraphs}
             </div>
         </section>
         
@@ -197,11 +236,23 @@ export class WebsiteGenerator {
     box-sizing: border-box;
 }
 
+:root {
+    /* Separate heading font stack */
+    --heading-font: 'Georgia', 'Times New Roman', serif;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
+}
+
+/* Apply heading font */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 /* Header */
@@ -322,6 +373,74 @@ section h2 {
     margin-bottom: 1rem;
     font-size: 1.1rem;
     line-height: 1.8;
+}
+
+.article-subheading {
+    font-family: var(--heading-font);
+    font-size: 1.35rem;
+    margin: 2rem 0 1rem;
+    color: #b71c1c;
+    line-height: 1.3;
+    position: relative;
+}
+.article-subheading:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg,#d32f2f,#f44336);
+    border-radius: 2px;
+}
+
+/* Explained word hover tooltips */
+.hover-hint {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 0.75rem;
+}
+
+.explained-word {
+        position: relative;
+        background: #fff9c4;
+        padding: 0 2px;
+        border-radius: 3px;
+        cursor: help;
+        transition: background-color 0.2s;
+}
+.explained-word.beginner { background: #e8f5e8; }
+.explained-word.intermediate { background: #fff3e0; }
+.explained-word.advanced { background: #ffebee; }
+.explained-word:hover { background: #ffe082; }
+
+.explained-word .tooltip-text {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 110%;
+        z-index: 10;
+        background: #222;
+        color: #fff;
+        padding: 0.6rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        line-height: 1.2;
+        width: 240px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        transition: opacity 0.15s;
+}
+.explained-word .tooltip-text .example { color: #90caf9; font-style: italic; }
+.explained-word:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+@media (max-width: 600px) {
+    .explained-word .tooltip-text {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 125%;
+        width: 70vw;
+    }
 }
 
 /* Explanations */

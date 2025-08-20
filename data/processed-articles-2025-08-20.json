@@ -9289,124 +9289,243 @@
     },
     "explanations": [
       {
+        "word": "beraten",
+        "definition": "to discuss, deliberate",
+        "example": "Hochrangige Armeevertreter beraten über ein Friedensabkommen.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "verb"
+      },
+      {
         "word": "Sicherheitsgarantien",
-        "definition": "Security guarantees; assurances provided to ensure the safety of a nation or region.",
-        "example": "Die Verhandlungen konzentrieren sich auf Sicherheitsgarantien für die Ukraine.",
+        "definition": "security guarantees",
+        "example": "Im Kern geht es um Sicherheitsgarantien für die Ukraine.",
         "difficulty": "advanced",
         "partOfSpeech": "noun"
       },
       {
         "word": "Absicherung",
-        "definition": "Safeguarding or securing; measures taken to ensure protection.",
-        "example": "Deutschland sei bereit, zur Absicherung eines Friedens Soldaten zu schicken.",
+        "definition": "safeguarding, securing",
+        "example": "Deutschland sei bereit, zur Absicherung Soldaten zu schicken.",
         "difficulty": "intermediate",
         "partOfSpeech": "noun"
       },
       {
-        "word": "Mordanklage",
-        "definition": "Murder charge; a formal accusation for committing murder.",
-        "example": "Die Generalstaatsanwaltschaft erhob eine Mordanklage gegen den Tatverdächtigen.",
+        "word": "stationiert",
+        "definition": "stationed",
+        "example": "Es ist unwahrscheinlich, dass Soldaten stationiert werden.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "adj"
+      },
+      {
+        "word": "Anklage",
+        "definition": "charge, accusation",
+        "example": "Die Generalstaatsanwaltschaft hat Anklage erhoben.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Tatverdächtigen",
+        "definition": "suspect",
+        "example": "Dem Tatverdächtigen wird Mord vorgeworfen.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Ermittlungsbehörde",
+        "definition": "investigative authority",
+        "example": "Die Ermittlungsbehörde teilte dies mit.",
+        "difficulty": "advanced",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "zivilrechtlich",
+        "definition": "civil law-related",
+        "example": "Ein zivilrechtlicher Streit war das Motiv.",
+        "difficulty": "advanced",
+        "partOfSpeech": "adj"
+      },
+      {
+        "word": "Erlass",
+        "definition": "decree, order",
+        "example": "Trump gewährte TikTok per Erlass eine Frist.",
+        "difficulty": "advanced",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "verlängerte",
+        "definition": "extended",
+        "example": "Er verlängerte die Frist mehrfach.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "verb"
+      },
+      {
+        "word": "Berufungsantrag",
+        "definition": "appeal request",
+        "example": "Uribe stellte einen Berufungsantrag.",
         "difficulty": "advanced",
         "partOfSpeech": "noun"
       },
       {
         "word": "Zeugenbestechung",
-        "definition": "Witness bribery; the act of bribing a witness to influence their testimony.",
-        "example": "Uribe wurde wegen Zeugenbestechung und Verfahrensbetrugs verurteilt.",
+        "definition": "witness tampering",
+        "example": "Uribe wurde wegen Zeugenbestechung verurteilt.",
         "difficulty": "advanced",
         "partOfSpeech": "noun"
       },
       {
-        "word": "Verfahrensbetrug",
-        "definition": "Procedural fraud; fraud committed during a judicial or administrative process.",
-        "example": "Das Gericht wirft ihm Verfahrensbetrug in einem wichtigen Fall vor.",
+        "word": "rechtskräftig",
+        "definition": "legally binding",
+        "example": "Das Urteil war noch nicht rechtskräftig.",
         "difficulty": "advanced",
-        "partOfSpeech": "noun"
+        "partOfSpeech": "adj"
       },
       {
-        "word": "Verschiebearbeiten",
-        "definition": "Relocation works; activities involved in moving or shifting something.",
-        "example": "Die Verschiebearbeiten der Kirche begannen am Dienstag.",
+        "word": "Messehallen",
+        "definition": "exhibition halls",
+        "example": "Die Messehallen bleiben zunächst dem Fachpublikum vorbehalten.",
         "difficulty": "intermediate",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Computerspielebranche",
+        "definition": "computer games industry",
+        "example": "Die Computerspielebranche ist ein wichtiger Wirtschaftssektor.",
+        "difficulty": "advanced",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Eisenerzbergbau",
+        "definition": "iron ore mining",
+        "example": "Der Eisenerzbergbau bedroht die Kirche von Kiruna.",
+        "difficulty": "advanced",
         "partOfSpeech": "noun"
       },
       {
         "word": "ferngesteuert",
-        "definition": "Remotely controlled; operated from a distance using a remote control.",
-        "example": "Die Kirche wird auf einer ferngesteuerten Transportvorrichtung bewegt.",
-        "difficulty": "intermediate",
-        "partOfSpeech": "adjective"
+        "definition": "remotely controlled",
+        "example": "Das Gotteshaus bewegt sich auf einer ferngesteuerten Vorrichtung.",
+        "difficulty": "advanced",
+        "partOfSpeech": "adj"
       },
       {
-        "word": "Computerspielebranche",
-        "definition": "Computer games industry; the sector focused on the development and sales of video games.",
-        "example": "Die Computerspielebranche erzielt jährlich Milliardenumsätze weltweit.",
+        "word": "Schneckentempo",
+        "definition": "snail's pace",
+        "example": "Die Kirche rollt im Schneckentempo voran.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Verfahrensbetrug",
+        "definition": "procedural fraud",
+        "example": "Uribe wurde wegen Verfahrensbetrugs verurteilt.",
+        "difficulty": "advanced",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Finca",
+        "definition": "estate, farm",
+        "example": "Uribe sollte die Strafe auf seiner Finca antreten.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "verschieben",
+        "definition": "to move, postpone",
+        "example": "Die Verschiebearbeiten der Kirche begannen am Dienstag.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "verb"
+      },
+      {
+        "word": "Kronen",
+        "definition": "crowns (currency)",
+        "example": "Das Versetzen kostet 500 Millionen Schwedische Kronen.",
+        "difficulty": "intermediate",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Gericht",
+        "definition": "court",
+        "example": "Ein Gericht ordnete die Freilassung an.",
+        "difficulty": "beginner",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Fachpublikum",
+        "definition": "specialist audience",
+        "example": "Die Messehallen sind zunächst dem Fachpublikum vorbehalten.",
+        "difficulty": "advanced",
+        "partOfSpeech": "noun"
+      },
+      {
+        "word": "Menschenrechtsverletzungen",
+        "definition": "human rights violations",
+        "example": "Uribe wird Menschenrechtsverletzungen vorgeworfen.",
         "difficulty": "advanced",
         "partOfSpeech": "noun"
       }
     ],
     "quizzes": [
       {
-        "question": "What is the main topic discussed by military leaders in Washington regarding Ukraine?",
+        "question": "What is the primary topic of the first article about Ukraine?",
         "options": [
-          "The deployment of American ground troops.",
-          "Possible peace agreements and security guarantees for Ukraine.",
-          "Economic sanctions against NATO member states.",
-          "The expansion of NATO into eastern Europe."
+          "A discussion about financial aid for Ukraine",
+          "A meeting of military leaders discussing a potential peace agreement for Ukraine",
+          "The deployment of NATO troops to Ukraine",
+          "A statement about US troops being stationed in Ukraine"
         ],
         "correctAnswer": 1,
-        "explanation": "The text mentions that military leaders are discussing a potential peace agreement and security guarantees for Ukraine.",
-        "relatedWord": "Sicherheitsgarantien"
+        "explanation": "The article focuses on high-ranking military representatives discussing a potential peace agreement for Ukraine, including security guarantees and the possibility of sending troops.",
+        "relatedWord": "beraten"
       },
       {
-        "question": "Which word describes providing protection or ensuring security?",
+        "question": "What was the motive behind the attack at the Magdeburg Christmas market, according to investigators?",
         "options": [
-          "Absicherung",
-          "Verschiebearbeiten",
-          "Zeugenbestechung",
-          "Verfahrensbetrug"
+          "Religious extremism",
+          "Political disagreements",
+          "Anger over the outcome of a civil lawsuit",
+          "A mental health issue"
+        ],
+        "correctAnswer": 2,
+        "explanation": "The article states that the motive of the accused was anger over the outcome of a civil lawsuit (zivilrechtlicher Streit).",
+        "relatedWord": "zivilrechtlich"
+      },
+      {
+        "question": "What does the term 'rechtskräftig' mean in the context of the article about Álvaro Uribe?",
+        "options": [
+          "Legally binding or final",
+          "Under investigation",
+          "Temporarily suspended",
+          "Subject to appeal"
         ],
         "correctAnswer": 0,
-        "explanation": "The word 'Absicherung' translates to 'protection' or 'support' and is used in the context of ensuring security for Ukraine.",
-        "relatedWord": "Absicherung"
+        "explanation": "In the article, 'rechtskräftig' refers to the fact that the court's decision was not yet legally binding or final.",
+        "relatedWord": "rechtskräftig"
       },
       {
-        "question": "Why was Kolumbian ex-president Álvaro Uribe sentenced to house arrest?",
+        "question": "What is significant about the Gamescom event in Cologne?",
         "options": [
-          "He was accused of human rights violations.",
-          "He was found guilty of bribing witnesses and procedural fraud.",
-          "He opposed left-wing guerrilla groups in Colombia.",
-          "He misused public funds during his presidency."
-        ],
-        "correctAnswer": 1,
-        "explanation": "The text specifies that Uribe was sentenced due to 'Zeugenbestechung' (witness bribing) and 'Verfahrensbetrug' (procedural fraud).",
-        "relatedWord": "Zeugenbestechung"
-      },
-      {
-        "question": "What was the innovative method used to relocate the Kiruna church?",
-        "options": [
-          "It was dismantled and rebuilt at a new site.",
-          "It was moved on a ferngesteuert transport device with wheels.",
-          "It was airlifted by helicopters to its new location.",
-          "It was floated across a river."
-        ],
-        "correctAnswer": 1,
-        "explanation": "The text mentions that the church was moved using a 'ferngesteuert' (remote-controlled) transport device with wheels.",
-        "relatedWord": "ferngesteuert"
-      },
-      {
-        "question": "What economic significance does the Gamescom event highlight?",
-        "options": [
-          "The annual revenue of the Computerspielebranche exceeds $180 billion globally.",
-          "It attracts fewer visitors compared to other gaming events.",
-          "It primarily focuses on board games and tabletop gaming.",
-          "It is restricted to industry professionals only."
+          "It is the largest gaming convention in the world.",
+          "It exclusively features games developed in Germany.",
+          "It is only open to private industry professionals.",
+          "It is a charity event for gaming enthusiasts."
         ],
         "correctAnswer": 0,
-        "explanation": "The text emphasizes the economic importance of the 'Computerspielebranche' (computer gaming industry), mentioning its global revenue surpassing $180 billion annually.",
-        "relatedWord": "Computerspielebranche"
+        "explanation": "The article highlights that Gamescom is the largest gaming convention in the world, with 1,500 exhibitors and hundreds of thousands of fans.",
+        "relatedWord": "Fachpublikum"
+      },
+      {
+        "question": "What was the reason for moving the Kiruna Church in Sweden?",
+        "options": [
+          "To restore the church due to old age",
+          "To protect it from collapse caused by nearby iron ore mining",
+          "To expand the local city center",
+          "To relocate it closer to the community"
+        ],
+        "correctAnswer": 1,
+        "explanation": "The article explains that the church was at risk of collapse due to iron ore mining in the area and was moved to a safer location.",
+        "relatedWord": "Eisenerzbergbau"
       }
     ],
-    "processedDate": "2025-08-20T12:10:01.861Z"
+    "processedDate": "2025-08-20T20:09:45.694Z"
   }
 ]

@@ -7,10 +7,12 @@ import { WordExplanation, Quiz, GitHubModelsResponse } from './types';
 export class AIService {
   private readonly token: string;
   private readonly endpoint: string;
+  private readonly targetWords: number;
 
   constructor() {
     this.token = process.env.GITHUB_TOKEN || '';
     this.endpoint = process.env.GITHUB_MODEL_ENDPOINT || 'https://models.inference.ai.azure.com';
+  this.targetWords = parseInt(process.env.DIFFICULT_WORD_TARGET || '24', 10);
     
     if (!this.token) {
       throw new Error('GITHUB_TOKEN environment variable is required');
@@ -21,20 +23,21 @@ export class AIService {
    * Identifies difficult German words in the text and provides explanations
    */
   async explainDifficultWords(text: string): Promise<WordExplanation[]> {
-    const prompt = `
-    Analyze the following German text and identify 5-8 difficult words that would be challenging for intermediate German learners. 
-    For each word, provide:
-    1. The word itself
-    2. A clear definition in English
-    3. An example sentence in German using the word
-    4. Difficulty level (beginner/intermediate/advanced)
-    5. Part of speech
+  const n = this.targetWords;
+  const prompt = `You are assisting German learners. From the provided German text, extract ${n}-${n+6} difficult single words OR short multi-word expressions suitable for an upper A2-B2 learner to study. Prefer:
+  - Less common vocabulary, idiomatic expressions, separable verbs, useful collocations
+  - NO proper nouns (countries, names) unless they form an expression
+  - Unique entries (no duplicates, no different inflections of the same lemma unless meaning shifts)
 
-    Return the response as a JSON array of objects with properties: word, definition, example, difficulty, partOfSpeech.
+  For each item return an object with keys:
+  word (original surface form as appears first),
+  definition (concise English gloss),
+  example (a SHORT original German sentence or phrase using the word/expression),
+  difficulty (beginner|intermediate|advanced),
+  partOfSpeech (noun, verb, adj, adv, phrase, etc.)
 
-    German text:
-    ${text}
-    `;
+  Output ONLY valid JSON: an array of objects, no markdown, no commentary.
+  German text:\n${text}`;
 
     try {
       const response = await this.callGitHubModels(prompt);
